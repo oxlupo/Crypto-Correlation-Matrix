@@ -1,9 +1,14 @@
+from coingecko import get_historical_data
 import pandas as pd
 import seaborn as sn
 import matplotlib.pyplot as plt
 
-df = pd.DataFrame({"1": [1, 2, 3, 4],
-                   "2": [2, 4, 5, 1],
+fantom = get_historical_data(id="fantom", days='365', interval="daily", vs_currency="usd")
+bitcoin = get_historical_data(id="bitcoin", days='365', interval="daily", vs_currency="usd")
+
+
+df = pd.DataFrame({"fantom": fantom,
+                   "bitcoin": bitcoin,
                    })
 
 correlation = df.corr()
