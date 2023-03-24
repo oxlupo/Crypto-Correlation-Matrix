@@ -1,5 +1,4 @@
 from pycoingecko import CoinGeckoAPI
-import requests
 cg = CoinGeckoAPI()
 
 
@@ -10,9 +9,6 @@ def get_price_token(token_name, pair):
         return cg.get_price(ids=token_name, vs_currencies=pair)
     else:
         raise Exception("An Error was occur don't use Dict for token_list")
-
-
-fantom = get_price_token(token_name="fantom", pair="usd")
 
 
 def get_historical_data(id: str, days: str, interval: str, vs_currency: str):
@@ -29,7 +25,3 @@ def get_historical_data(id: str, days: str, interval: str, vs_currency: str):
         return historical_list
     except Exception as e:
         print(e)
-
-
-hist = get_historical_data(id="fantom", days='365', interval="daily", vs_currency="usd")
-print(hist)
