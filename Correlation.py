@@ -1,5 +1,4 @@
 from coingecko import get_historical_data, several_historical_data
-import pandas as pd
 import seaborn as sn
 import matplotlib.pyplot as plt
 
