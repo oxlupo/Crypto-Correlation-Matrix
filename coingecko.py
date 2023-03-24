@@ -1,3 +1,4 @@
+import pandas as pd
 from pycoingecko import CoinGeckoAPI
 cg = CoinGeckoAPI()
 
@@ -25,3 +26,16 @@ def get_historical_data(id: str, days: str, interval: str, vs_currency: str):
         return historical_list
     except Exception as e:
         print(e)
+
+
+def several_historical_data(token_list: list, days: str):
+    """
+    token_list -> ["bitcoin", "ethereum", "fantom", "link", "litecoin"]:param
+    """
+    historical_dict = dict()
+
+    for token in token_list:
+        hist = get_historical_data(id=token, days=days, interval="daily", vs_currency="usd")
+        historical_dict[token] = hist
+    hist_df = pd.DataFrame(historical_dict)
+    return hist_df
