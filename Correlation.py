@@ -1,18 +1,14 @@
-from coingecko import get_historical_data
+from coingecko import get_historical_data, several_historical_data
 import pandas as pd
 import seaborn as sn
 import matplotlib.pyplot as plt
 
-fantom = get_historical_data(id="fantom", days='365', interval="daily", vs_currency="usd")
-bitcoin = get_historical_data(id="bitcoin", days='365', interval="daily", vs_currency="usd")
+token_list = ["bitcoin", "ethereum", "fantom", "link", "litecoin"]
 
+if __name__ == "__main__":
+    historical_df = several_historical_data(token_list=token_list, days="365")
+    correlation = historical_df.corr()
+    print(correlation)
 
-df = pd.DataFrame({"fantom": fantom,
-                   "bitcoin": bitcoin,
-                   })
-
-correlation = df.corr()
-print(correlation)
-
-sn.heatmap(correlation, annot=True)
-plt.show()
+    sn.heatmap(correlation, annot=True)
+    plt.show()
